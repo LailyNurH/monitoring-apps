@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/menuFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/menuFragment"
@@ -13,10 +13,107 @@
         <action
             android:id="@+id/action_menuFragment_to_membershipFragment"
             app:destination="@id/membershipFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_paketBerlanggananFragment"
+            app:destination="@id/paketBerlanggananFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_riwayatFragment"
+            app:destination="@id/riwayatFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_statusFragment"
+            app:destination="@id/statusFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_bayarFragment"
+            app:destination="@id/bayarFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/membershipFragment"
         android:name="com.night.monitoring.views.MembershipFragment"
         android:label="fragment_membership"
-        tools:layout="@layout/fragment_membership" />
+        tools:layout="@layout/fragment_membership" >
+        <action
+            android:id="@+id/action_membershipFragment_to_konfrimBayarFragment"
+            app:destination="@id/konfrimBayarFragment" />
+        <action
+            android:id="@+id/action_membershipFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bayarFragment"
+        android:name="com.night.monitoring.views.BayarFragment"
+        android:label="fragment_bayar"
+        tools:layout="@layout/fragment_bayar" />
+    <fragment
+        android:id="@+id/konfrimBayarFragment"
+        android:name="com.night.monitoring.views.KonfrimBayarFragment"
+        android:label="fragment_konfrim_bayar"
+        tools:layout="@layout/fragment_konfrim_bayar" />
+    <fragment
+        android:id="@+id/paketBerlanggananFragment"
+        android:name="com.night.monitoring.views.PaketBerlanggananFragment"
+        android:label="fragment_paket_berlangganan"
+        tools:layout="@layout/fragment_paket_berlangganan" >
+        <action
+            android:id="@+id/action_paketBerlanggananFragment_to_membershipFragment"
+            app:destination="@id/membershipFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/riwayatFragment"
+        android:name="com.night.monitoring.views.RiwayatFragment"
+        android:label="fragment_riwayat"
+        tools:layout="@layout/fragment_riwayat" >
+        <action
+            android:id="@+id/action_riwayatFragment_to_bayarFragment"
+            app:destination="@id/bayarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.night.monitoring.views.StatusFragment"
+        android:label="fragment_status"
+        tools:layout="@layout/fragment_status" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.night.monitoring.views.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.night.monitoring.views.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.night.monitoring.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.night.monitoring.views.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

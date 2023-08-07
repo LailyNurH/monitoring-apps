@@ -58,9 +58,9 @@ class SignInActivity : AppCompatActivity() {
                         val token = response.body()!!.data.token
                         sessionManager.saveString("TOKEN", "Bearer " + token)
                         sessionManager.saveBoolean("LOGIN_STATUS", true)
-                        sessionManager.saveString(
+                        sessionManager.saveInteger(
                             "ADMIN_ID",
-                            response.body()!!.data.user.id.toString()
+                            response.body()!!.data.user.id.toInt()
                         )
                          sessionManager.saveString(
                              "USERNAME",
