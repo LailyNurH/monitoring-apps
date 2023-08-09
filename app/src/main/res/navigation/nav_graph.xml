@@ -73,7 +73,11 @@
         android:id="@+id/statusFragment"
         android:name="com.night.monitoring.views.StatusFragment"
         android:label="fragment_status"
-        tools:layout="@layout/fragment_status" />
+        tools:layout="@layout/fragment_status" >
+        <action
+            android:id="@+id/action_statusFragment_to_aktifDetailFragment"
+            app:destination="@id/aktifDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.night.monitoring.views.SplashFragment"
@@ -131,4 +135,9 @@
             android:id="@+id/action_teknisiFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aktifDetailFragment"
+        android:name="com.night.monitoring.AktifDetailFragment"
+        android:label="fragment_aktif_detail"
+        tools:layout="@layout/fragment_aktif_detail" />
 </navigation>

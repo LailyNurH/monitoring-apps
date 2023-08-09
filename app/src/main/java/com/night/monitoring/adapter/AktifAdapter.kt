@@ -3,9 +3,11 @@ package com.night.monitoring.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.night.monitoring.R
 import com.night.monitoring.databinding.ItemAktifBinding
 import com.night.monitoring.databinding.ItemListMemberBinding
 import com.night.monitoring.model.member.Membership
@@ -37,11 +39,11 @@ class AktifAdapter :
 
             }
 
-//            binding.cvStatus.setOnClickListener {
-//                LOKASI = member.alamat
-//                val navController = itemView.findNavController()
-//                navController.navigate(R.id.action_riwayatFragment_to_bayarFragment)
-//            }
+            binding.root.setOnClickListener {
+                AKTIF_ID = member.id
+                val navController = itemView.findNavController()
+                navController.navigate(R.id.action_statusFragment_to_aktifDetailFragment)
+            }
         }
     }
     class Differ : DiffUtil.ItemCallback<Membership>() {
@@ -54,6 +56,6 @@ class AktifAdapter :
         }
     }
     companion object{
-        var LOKASI =""
+        var AKTIF_ID =""
     }
 }
