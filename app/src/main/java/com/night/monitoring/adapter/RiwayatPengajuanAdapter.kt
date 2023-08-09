@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -48,9 +50,15 @@ class RiwayatPengajuanAdapter :
             }
 
             binding.root.setOnClickListener {
-                ID_PENGAJUAN = member.id
-                val navController = itemView.findNavController()
-                navController.navigate(R.id.action_riwayatFragment_to_bayarFragment)
+                ID_PENGAJUAN = member.id.toInt()
+                if(member.statusVerifikasi == "N"){
+                    Toast.makeText(itemView.context, "Pengajuan anda Belum di Setujui", Toast.LENGTH_SHORT).show()
+                }else{
+                    val navController = itemView.findNavController()
+                    navController.navigate(R.id.action_riwayatFragment_to_bayarFragment)
+
+                }
+
             }
         }
     }
@@ -64,6 +72,6 @@ class RiwayatPengajuanAdapter :
         }
     }
     companion object{
-        var ID_PENGAJUAN =""
+        var ID_PENGAJUAN = 0
     }
 }

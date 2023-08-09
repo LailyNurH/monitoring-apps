@@ -44,8 +44,9 @@ class BayarFragment : Fragment() {
             }
 
             val userid = LoginFragment.sessionManager.getString("USER_ID")
+            val idPengajuan = ID_PENGAJUAN.toString().toInt()
             userid?.toInt()?.let {
-                api.getDetailMember(ID_PENGAJUAN.toInt()).enqueue(object : Callback<MemberResponse> {
+                api.getDetailMember(idPengajuan).enqueue(object : Callback<MemberResponse> {
                     override fun onResponse(
                         call: Call<com.night.monitoring.model.MemberResponse>,
                         response: Response<MemberResponse>

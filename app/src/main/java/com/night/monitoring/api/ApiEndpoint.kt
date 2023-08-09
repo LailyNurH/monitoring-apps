@@ -43,5 +43,13 @@ interface ApiEndpoint {
         @Path("id") id: Int,
     ) : Call <com.night.monitoring.model.MemberResponse>
 
+    @GET("listmember")
+    fun  showToTeknisi(
+    ) : Call <com.night.monitoring.model.member.MemberResponse>
+
+    @GET("status_yes/{id}")
+    fun  getStatusYes(
+        @Path("id") id: Int,
+    ) : Call <com.night.monitoring.model.member.MemberResponse>
 
 }

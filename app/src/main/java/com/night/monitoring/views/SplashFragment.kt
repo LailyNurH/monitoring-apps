@@ -33,15 +33,26 @@ class SplashFragment : Fragment() {
             Context.MODE_PRIVATE
         )
         sessionManager = SessionManager(requireContext())
-
+        val roleId = sessionManager.getString("ROLE_ID")
         val loginStatus = sessionManager.getBoolean("LOGIN_STATUS")
         if (loginStatus) {
-            goToHome()
+            if (roleId == "1") {
+                goToTeknisiFragment()
+            } else {
+                goToHome()
+            }
         } else {
             goToLogin()
         }
 
         return view
+    }
+
+    private fun goToTeknisiFragment() {
+        val postDelayed = Handler(Looper.myLooper()!!).postDelayed({
+            findNavController().navigate(R.id.action_splashFragment_to_teknisiFragment)
+        }, 1500)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

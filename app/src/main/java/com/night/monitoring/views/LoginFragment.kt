@@ -74,11 +74,17 @@ class LoginFragment : Fragment() {
                             "USERNAME",
                             response.body()!!.data.user.nama
                         )
+                        val roleId = response.body()!!.data.user.role
+                        SignInActivity.sessionManager.saveString("ROLE_ID", roleId)
+
                         val  username = response.body()!!.data.user.nama
                         NAME = username
 
                         Toast.makeText(requireContext(), "Password Benar", Toast.LENGTH_LONG)
                             .show()
+                        if(roleId  == "1"){
+
+                        }
                         findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
 
                     } else {
