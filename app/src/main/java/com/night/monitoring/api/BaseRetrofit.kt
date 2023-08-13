@@ -16,7 +16,8 @@ class BaseRetrofit {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.11/monitoring/index.php/Api_pcs/")
+                .baseUrl("https://tvkabelmimika.000webhostapp.com/index.php/Api_pcs/")
+//                .baseUrl("http://192.168.12.24/monitoring/index.php/Api_pcs/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

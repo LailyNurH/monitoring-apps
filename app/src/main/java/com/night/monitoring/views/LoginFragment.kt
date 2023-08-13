@@ -49,6 +49,9 @@ class LoginFragment : Fragment() {
 //        }
 
         with(binding) {
+            tvSignUp.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
 
 
         binding.btnSignIn.setOnClickListener {

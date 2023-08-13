@@ -3,16 +3,31 @@ package com.night.monitoring.api
 import com.night.monitoring.model.LoginResponse
 import com.night.monitoring.model.MemberResponse
 import com.night.monitoring.model.member.MemberResponsePost
+import com.night.monitoring.model.register.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiEndpoint {
+//    "email": "jkdsfjks@gmail.com",
+//    "password": "202cb962ac59075b964b07152d234b70",
+//    "nama": "jfdsf",
+//    "role": "0"
     @FormUrlEncoded
     @POST("login")
     fun login(
         @Field("email") user_email : String,
         @Field("password") password : String
     ) : Call<LoginResponse>
+
+    @FormUrlEncoded
+    @POST("user")
+    fun register(
+        @Field("email") email : String,
+        @Field("password") password : String,
+        @Field("nama") nama : String,
+        @Field("nohp") nohp : String,
+        @Field("role") role : Int,
+    ) : Call<RegisterResponse>
 
     @FormUrlEncoded
     @POST("member")
@@ -49,6 +64,11 @@ interface ApiEndpoint {
 
     @GET("status_yes/{id}")
     fun  getStatusYes(
+        @Path("id") id: Int,
+    ) : Call <com.night.monitoring.model.member.MemberResponse>
+
+    @GET("jatuhtempo/{id}")
+    fun  jatuh_tempo(
         @Path("id") id: Int,
     ) : Call <com.night.monitoring.model.member.MemberResponse>
 

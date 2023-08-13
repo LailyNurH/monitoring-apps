@@ -119,7 +119,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Sign Up"
+            android:text="Register"
+            android:textStyle="bold"
             android:textColor="#6BC9FF"
             android:textSize="14sp" />
     </LinearLayout>

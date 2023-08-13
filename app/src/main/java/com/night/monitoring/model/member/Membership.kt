@@ -33,5 +33,8 @@ data class Membership(
     @SerializedName("tanggal_pengajuan")
     val tanggalPengajuan: String,
     @SerializedName("tgl_berlangganan")
-    val tglBerlangganan: String
+    val tglBerlangganan: String,
+
+    @SerializedName("jatuh_tempo")
+    val jatuh_tempo: String
 )

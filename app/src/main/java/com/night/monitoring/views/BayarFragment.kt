@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.night.monitoring.R
+import com.night.monitoring.adapter.JatuhTempoAdapter
+import com.night.monitoring.adapter.MemberAdapter
 import com.night.monitoring.adapter.RiwayatPengajuanAdapter.Companion.ID_PENGAJUAN
 import com.night.monitoring.api.BaseRetrofit
 import com.night.monitoring.databinding.FragmentBayarBinding
@@ -22,6 +25,8 @@ import java.util.*
 class BayarFragment : Fragment() {
     private lateinit var binding: FragmentBayarBinding
     private val api by lazy { BaseRetrofit().endpoint }
+    private lateinit var jatuhTempoAdapter: JatuhTempoAdapter
+
 
 
     override fun onCreateView(
@@ -35,69 +40,79 @@ class BayarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            pilihtanggal.setOnClickListener {
-                showDatePicker()
+//            pilihtanggal.setOnClickListener {
+//                showDatePicker()
+//
+//            }
+//            submit.setOnClickListener {
+//                bayar()
+//            }
 
-            }
-            submit.setOnClickListener {
-                bayar()
-            }
+            jatuhTempoAdapter = JatuhTempoAdapter()
+            binding.rvJatuhtempo.adapter = jatuhTempoAdapter
+            binding.rvJatuhtempo.layoutManager = LinearLayoutManager(requireContext())
 
             val userid = LoginFragment.sessionManager.getString("USER_ID")
-            val idPengajuan = ID_PENGAJUAN.toString().toInt()
             userid?.toInt()?.let {
-                api.getDetailMember(idPengajuan).enqueue(object : Callback<MemberResponse> {
-                    override fun onResponse(
-                        call: Call<com.night.monitoring.model.MemberResponse>,
-                        response: Response<MemberResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            val memberResponse = response.body()
-                            idUser.text = memberResponse?.data?.membership?.id
-                            totalbauar.text = "Total Pembayaran: ${memberResponse?.data?.membership?.pembayaranMuka}"
+                api.jatuh_tempo(userid.toInt())
+                    .enqueue(object : Callback<com.night.monitoring.model.member.MemberResponse> {
+                        override fun onResponse(
+                            call: Call<com.night.monitoring.model.member.MemberResponse>,
+                            response: Response<com.night.monitoring.model.member.MemberResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                val members = response.body()?.data?.membership
 
-
-
+                                if (members != null) {
+                                    jatuhTempoAdapter.submitList(members)
+//                                riwayatAdapter.submitList(response.body()?.data)
+                                }
+                            } else {
+                                binding.llEmptyHistory.visibility = View.VISIBLE
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<MemberResponse>, t: Throwable) {
-                        // Handle API call failure
-                    }
-                })
+                        override fun onFailure(
+                            call: Call<com.night.monitoring.model.member.MemberResponse>,
+                            t: Throwable
+                        ) {
+//                            binding.llEmptyHistory.visibility = View.VISIBLE
+                        }
+                    })
             }
         }
     }
-
-    private fun bayar() {
-//        findNavController().navigate(R.id.ba)
-    }
-
-    private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                val selectedDate = formatDate(year, monthOfYear, dayOfMonth)
-                binding.tanggal.setText(selectedDate)
-            },
-            year,
-            month,
-            day
-        )
-
-
-
-        datePickerDialog.show()
-    }
-
-    private fun formatDate(year: Int, month: Int, day: Int): String {
-        // Adjust month to 1-based index (DatePicker gives month from 0 to 11)
-        val formattedMonth = month + 1
-        return "$day/$formattedMonth/$year"
-    }
 }
+
+
+//    private fun bayar() {
+////        findNavController().navigate(R.id.ba)
+//    }
+//
+//    private fun showDatePicker() {
+//        val calendar = Calendar.getInstance()
+//        val year = calendar.get(Calendar.YEAR)
+//        val month = calendar.get(Calendar.MONTH)
+//        val day = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//        val datePickerDialog = DatePickerDialog(
+//            requireContext(),
+//            { _: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+//                val selectedDate = formatDate(year, monthOfYear, dayOfMonth)
+//                binding.tanggal.setText(selectedDate)
+//            },
+//            year,
+//            month,
+//            day
+//        )
+//
+//
+//
+//        datePickerDialog.show()
+//    }
+//
+//    private fun formatDate(year: Int, month: Int, day: Int): String {
+//        // Adjust month to 1-based index (DatePicker gives month from 0 to 11)
+//        val formattedMonth = month + 1
+//        return "$day/$formattedMonth/$year"
+//    }
